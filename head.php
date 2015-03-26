@@ -3,7 +3,7 @@
 <script src="js/jquery-2.1.0.min.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <link rel="stylesheet" href="style.css">
-<link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/4.12/video.js"></script>
+<link href="js/video-js/video-js.css" rel="stylesheet">
+<script src="js/video-js/video.js"></script>
 
 <?php include 'config.php' ?>
