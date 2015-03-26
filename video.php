@@ -24,7 +24,7 @@ echo "<tr>";
 echo "<td>Duración: ".$video['length']." min. </td><td>Tamaño ".$video['size']." MB.</td>";
 echo "</tr>";
 echo "<tr>";
-echo "<td colspan=\"2\">Ruta: /".$video['path']."</td>";
+echo "<td colspan=\"2\">Ruta: /".$video['pathtofile']."</td>";
 echo "</tr>";
 echo "</table>";
 
@@ -38,7 +38,7 @@ echo "<video id=\"video-".$video['id']."\" class=\"video-js vjs-default-skin vjs
 //echo "poster=\"http://video-js.zencoder.com/oceans-clip.png\"";
 
 echo  " data-setup='{\"example_option\":true}'>
- <source src=\"".$video['path']."\" type='".$video['type']."' />
+ <source src=\"".$video['pathtofile']."\" type='".$video['type']."' />
  <p class=\"vjs-no-js\">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href=\"http://videojs.com/html5-video-support/\" target=\"_blank\">supports HTML5 video</a></p>
 </video>";
 

@@ -52,6 +52,29 @@ function userShowNameById($id){
 	return $linea['showname'];
 }
 
+function insertVideoInfo($title, $recorded_when, $recorded_who, $length, $size, $type, $pathtofile){
+
+if(!empty($title) && !empty($recorded_when) && !empty($type)  && !empty($pathtofile)){
+
+		global $conexion;
+		$que = "INSERT INTO video (title, recorded_when, recorded_who, length, pathtofile, size, type) VALUES (\"".$title."\",\"".$recorded_when."\",\"".$recorded_who."\",\"".$length."\",\"".$pathtofile."\",\"".$size."\",\"".$type."\")";
+		if(mysqli_query($conexion,$que)){
+			echo "Los datos del vídeo se han registrado correctamente.<br>";
+		}else{
+			echo "No se han podido introducir los datos en la base de datos.<br>";
+		}
+		
+	}else{
+		echo "No se han intentado introducir los datos en la base de datos.<br>";
+		//echo "Title: ".$title."<br>";
+		//echo "Recorded_when: ".$recorded_when."<br>";
+		//echo "Type: ".$type."<br>";
+		//echo "Path: ".$pathtofile."<br>";
+
+	}
+
+}
+
 
 
 ?>

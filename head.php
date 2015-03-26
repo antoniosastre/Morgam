@@ -5,3 +5,5 @@
 <link rel="stylesheet" href="style.css">
 <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
 <script src="//vjs.zencdn.net/4.12/video.js"></script>
+
+<?php include 'config.php' ?>
