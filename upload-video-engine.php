@@ -24,8 +24,9 @@ $newfilename = date('U');
 
 $target_dir = "storage/".date('Y')."/".date('m')."/".date('d')."/";
 
-mkdir($target_dir, 0777, true);
-
+if (!is_dir($target_dir)) {
+    mkdir($target_dir, 0777, true);    
+}
 
 $target_file = $target_dir . $newfilename .".". $ext;
 $uploadOk = 1;
