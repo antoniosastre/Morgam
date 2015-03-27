@@ -7,17 +7,33 @@
 <script src="js/video-js/video.js"></script>
 <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
-<?php include 'config.php' ?>
+<?php include 'config.php';
+		include 'db.php';
+		?>
 <script type="text/javascript">
+
 	
 	$(function(){
-            var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
 
+
+            var people = <?php echo json_encode(peopleArray()); ?>;
+            var places = <?php echo json_encode(placesArray()); ?>;
+            var tags = <?php echo json_encode(tagsArray()); ?>;
 
 
     $(document).ready(function() {
+            $('.input_people').tagit({
+                availableTags: people,
+                allowSpaces: true
+            });
+
+            $('.input_places').tagit({
+                availableTags: places,
+                allowSpaces: true
+            });
+
             $('.input_tags').tagit({
-                availableTags: sampleTags,
+                availableTags: tags,
                 allowSpaces: true
             });
     });

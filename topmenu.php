@@ -3,7 +3,6 @@
 	    <div id=\"nav-wrapper\">
 	        <ul>
 	        	<li>";
-	include 'db.php';
 	echo "</li>
 	            <li><a href=\"index.php\">Inicio</a></li>
 	            <li><a href=\"goto.php\">Ir a...</a></li>

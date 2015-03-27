@@ -85,27 +85,152 @@ function processPeople($media, $allpeople, $isclipgroup=0){
 
 	foreach($peoplearray as $person){
 
-		if(true){ //El nombre no existía
+		$exists = existThisPerson($person);
+
+		if(empty($exists)){ //El nombre no existía
 			$que = "INSERT INTO people (name) VALUES (\"".$person."\")";
 			mysqli_query($conexion,$que);
 
 			$que = "INSERT INTO peopleinmedia (person, isclipgroup, media) VALUES (\"".mysqli_insert_id($conexion)."\",".$isclipgroup.",\"".$media."\")";
 			mysqli_query($conexion,$que);
 		}else{ //El nombre ya existía
-
+			$que = "INSERT INTO peopleinmedia (person, isclipgroup, media) VALUES (\"".$exists."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
 		}
 		$iter++;
 	}
 }
 				
-function processPlaces($media, $allplaces){
+function processPlaces($media, $allplaces, $isclipgroup=0){
+	$placesarray = explode(',', $allplaces);
+	$iter=0;
+	global $conexion;
+
+	foreach($placesarray as $place){
+
+		$exists = existThisPlace($place);
+
+		if(empty($exists)){ //El nombre no existía
+			$que = "INSERT INTO places (name) VALUES (\"".$place."\")";
+			mysqli_query($conexion,$que);
+
+			$que = "INSERT INTO placesinmedia (place, isclipgroup, media) VALUES (\"".mysqli_insert_id($conexion)."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
+		}else{ //El nombre ya existía
+			$que = "INSERT INTO placesinmedia (place, isclipgroup, media) VALUES (\"".$exists."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
+		}
+		$iter++;
+	}
+}
+
+function processTags($media, $alltags, $isclipgroup=0){
+	$tagsarray = explode(',', $alltags);
+	$iter=0;
+	global $conexion;
+
+	foreach($tagsarray as $tag){
+
+		$exists = existThisTag($tag);
+
+		if(empty($exists)){ //El nombre no existía
+			$que = "INSERT INTO tags (name) VALUES (\"".$tag."\")";
+			mysqli_query($conexion,$que);
+
+			$que = "INSERT INTO tagsinmedia (tag, isclipgroup, media) VALUES (\"".mysqli_insert_id($conexion)."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
+		}else{ //El nombre ya existía
+			$que = "INSERT INTO tagsinmedia (tag, isclipgroup, media) VALUES (\"".$exists."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
+		}
+		$iter++;
+	}
+}
+
+function existThisPerson($person){
+
+	global $conexion;
+	$que = "SELECT id FROM people WHERE name='".$person."'";
+	$res = mysqli_query($conexion,$que);
+
+	if(empty($res)){
+		return 0;
+	}else{
+		$linea = mysqli_fetch_array($res);
+	return $linea['id'];
+	}
+}
+
+function existThisPlace($place){
+
+	global $conexion;
+	$que = "SELECT id FROM places WHERE name='".$place."'";
+	$res = mysqli_query($conexion,$que);
+
+	if(empty($res)){
+		return 0;
+	}else{
+		$linea = mysqli_fetch_array($res);
+	return $linea['id'];
+	}
+}
+
+function existThisTag($tag){
+
+	global $conexion;
+	$que = "SELECT id FROM tags WHERE name='".$tag."'";
+	$res = mysqli_query($conexion,$que);
+
+	if(empty($res)){
+		return 0;
+	}else{
+		$linea = mysqli_fetch_array($res);
+	return $linea['id'];
+	}
+}
+
+
+function peopleArray(){
+
+		global $conexion;
+		$que = "SELECT name FROM people";
+		$res = mysqli_query($conexion,$que);
+
+		while ($row = mysqli_fetch_array($res)){
+		$people[] = $row['name'];
+		}
+
+		return $people;
 
 }
 
-function processTags($media, $alltags){
+function placesArray(){
+
+		global $conexion;
+		$que = "SELECT name FROM places";
+		$res = mysqli_query($conexion,$que);
+
+		while ($row = mysqli_fetch_array($res)){
+		$places[] = $row['name'];
+		}
+
+		return $places;
 
 }
 
+function tagsArray(){
+
+		global $conexion;
+		$que = "SELECT name FROM tags";
+		$res = mysqli_query($conexion,$que);
+
+		while ($row = mysqli_fetch_array($res)){
+		$tags[] = $row['name'];
+		}
+
+		return $tags;
+
+}
 
 
 ?>

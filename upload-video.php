@@ -19,11 +19,11 @@
 	<input type="date" name="recorded_when" id="recorded_when"><br><br>
 
 	Personas: <br>
-	<input name="people" class="input_tags">
+	<input name="people" class="input_people">
 	<br>
 
 	Lugares: <br>
-	<input name="places" class="input_tags">
+	<input name="places" class="input_places">
 	<br>
 
 	Etiquetas: <br>
