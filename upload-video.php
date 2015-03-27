@@ -19,13 +19,16 @@
 	<input type="date" name="recorded_when" id="recorded_when"><br><br>
 
 	Personas: <br>
-	<br><br>
+	<input name="people" class="input_tags">
+	<br>
 
 	Lugares: <br>
-	<br><br>
+	<input name="places" class="input_tags">
+	<br>
 
 	Etiquetas: <br>
-	<br><br>
+	<input name="tags" class="input_tags">
+	<br>
 
 	Archivo: <br>
     <input type="file" name="fileToUpload" id="fileToUpload"><br><br>

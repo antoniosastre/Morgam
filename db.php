@@ -60,8 +60,10 @@ if(!empty($title) && !empty($recorded_when) && !empty($type)  && !empty($pathtof
 		$que = "INSERT INTO video (title, recorded_when, recorded_who, length, pathtofile, size, type) VALUES (\"".$title."\",\"".$recorded_when."\",\"".$recorded_who."\",\"".$length."\",\"".$pathtofile."\",\"".$size."\",\"".$type."\")";
 		if(mysqli_query($conexion,$que)){
 			echo "Los datos del vídeo se han registrado correctamente.<br>";
+			return mysqli_insert_id($conexion);
 		}else{
 			echo "No se han podido introducir los datos en la base de datos.<br>";
+			return -1;
 		}
 		
 	}else{
@@ -70,8 +72,37 @@ if(!empty($title) && !empty($recorded_when) && !empty($type)  && !empty($pathtof
 		//echo "Recorded_when: ".$recorded_when."<br>";
 		//echo "Type: ".$type."<br>";
 		//echo "Path: ".$pathtofile."<br>";
+		return -1;
 
 	}
+
+}
+
+function processPeople($media, $allpeople, $isclipgroup=0){
+	$peoplearray = explode(',', $allpeople);
+	$iter=0;
+	global $conexion;
+
+	foreach($peoplearray as $person){
+
+		if(true){ //El nombre no existía
+			$que = "INSERT INTO people (name) VALUES (\"".$person."\")";
+			mysqli_query($conexion,$que);
+
+			$que = "INSERT INTO peopleinmedia (person, isclipgroup, media) VALUES (\"".mysqli_insert_id($conexion)."\",".$isclipgroup.",\"".$media."\")";
+			mysqli_query($conexion,$que);
+		}else{ //El nombre ya existía
+
+		}
+		$iter++;
+	}
+}
+				
+function processPlaces($media, $allplaces){
+
+}
+
+function processTags($media, $alltags){
 
 }
 

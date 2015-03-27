@@ -73,8 +73,15 @@ if ($uploadOk==0){
 			//echo "Type: ".$_FILES["fileToUpload"]["type"]."<br>";
 			//echo "Path: ".$target_file."<br>";
 
-			insertVideoInfo($_POST['title'], $_POST['recorded_when'], 1, 100, 200, $_FILES["fileToUpload"]["type"], $target_file);
+			$idinsertedmedia = insertVideoInfo($_POST['title'], $_POST['recorded_when'], 1, 100, 200, $_FILES["fileToUpload"]["type"], $target_file);
 
+			if($idinsertedmedia != -1){
+
+				processPeople($idinsertedmedia, $_POST['people']);
+				processPlaces($idinsertedmedia, $_POST['places']);
+				processTags($idinsertedmedia, $_POST['tags']);
+
+			}
 
 		}else{ 
 			echo "El archivo no ha podido ser subido correctamente.<br>"; 
