@@ -35,6 +35,7 @@ Debe iniciar sesión<br>
 </form> 
 </td>
 </tr>
+<!--
 <tr>
 	<td>
 		Grupo de clips:
@@ -45,6 +46,8 @@ Debe iniciar sesión<br>
 </form>
 	</td>
 </tr>
+-->
+<!--
 <tr>
 	<td>
 		Clip:
@@ -55,6 +58,18 @@ Debe iniciar sesión<br>
 </form>
 	</td>
 </tr>
+-->
+<tr>
+	<td>
+		Usuario:
+	</td>
+	<td>
+<form action="user.php" method="get">
+ <input type="text" name="u"> <input type="submit" value="Ir al usuario">
+</form>
+	</td>
+</tr>
+
 </table>
 
 <?

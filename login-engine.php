@@ -2,7 +2,7 @@
 	<head>
 	<?php include 'head.php';
 
-	if(!isset($_COOKIE['morgam'])){
+	if(!isValidCookie("morgam")){
 
 		if(!empty($_POST['user']) && !empty($_POST['password'])){
 

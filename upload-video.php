@@ -1,6 +1,43 @@
 <html>
 	<head>
-	<?php include 'head.php' ?>
+	<?php include 'head.php';
+
+if(isValidCookie("morgam")){
+		?>
+<script type="text/javascript">
+
+	
+	$(function(){
+
+
+            var people = <?php echo json_encode(peopleArray()); ?>;
+            var places = <?php echo json_encode(placesArray()); ?>;
+            var tags = <?php echo json_encode(tagsArray()); ?>;
+
+
+    $(document).ready(function() {
+            $('.input_people').tagit({
+                availableTags: people,
+                allowSpaces: true
+            });
+
+            $('.input_places').tagit({
+                availableTags: places,
+                allowSpaces: true
+            });
+
+            $('.input_tags').tagit({
+                availableTags: tags,
+                allowSpaces: true
+            });
+    });
+
+    });
+</script>
+
+<? } ?>
+
+
 	</head>
 	<body>
 		<?php include 'topmenu.php'; ?>

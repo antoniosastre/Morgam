@@ -14,7 +14,7 @@ function dbstatus(){
 	if (mysqli_connect_errno($conexion)){
   		echo "ERR." . mysqli_connect_error();
   	}else{
-  		echo "<img src=\"img/green.png\" width=\"18\" height=\"18\">";
+  		echo "<img src=\"img/green.png\" width=\"18\" height=\"18\" style=\"position: relative; top: 4px; \">";
   	}
 }
 
@@ -60,6 +60,22 @@ function userShowNameByUser($user){
 	$res = mysqli_query($conexion,$que);
 	$linea = mysqli_fetch_array($res);
 	return $linea['showname'];
+}
+
+function userDataByUser($user){
+	global $conexion;
+	$que = "SELECT * FROM users WHERE user='".$user."'";
+	$res = mysqli_query($conexion,$que);
+	$linea = mysqli_fetch_array($res);
+	return $linea;
+}
+
+function userIdByUser($user){
+	global $conexion;
+	$que = "SELECT id FROM users WHERE user='".$user."'";
+	$res = mysqli_query($conexion,$que);
+	$linea = mysqli_fetch_array($res);
+	return $linea['id'];
 }
 
 function insertVideoInfo($title, $recorded_when, $recorded_who, $length, $size, $type, $pathtofile){
@@ -306,18 +322,112 @@ function isValidCookie($cookie){
 
 }
 
+function videoYears(){
+
+	global $conexion;
+	$que = "SELECT DISTINCT YEAR(recorded_when) as year FROM video ORDER BY year DESC";
+	$res = mysqli_query($conexion,$que);
+
+	while($years[] = mysqli_fetch_array($res)['year']){
+
+	}
+
+	return $years;
+
+}
+
+function tableOfYear($year, $user = 0){
+
+	global $conexion;
+	if(empty($user)){
+		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" ORDER BY recorded_when DESC, id DESC";
+	}else{
+		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" AND recorded_who=\"".userIdByUser($user)."\" ORDER BY recorded_when DESC, id DESC";
+	}
+	$res = mysqli_query($conexion,$que);
+
+	echo "<table border=\"1\">";
+	echo "<tr>";
+	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
+	echo "</tr>";
+
+	while($video = mysqli_fetch_array($res)){
+		echo "<tr>";
+			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
+		echo "</tr>";
+	}
+
+	echo "</table>";
+
+}
+
+
+function tableOfInterval($from, $to, $user = 0){
+
+	$from = implode('-', array($from, '01'));
+	$to = implode('-', array($to, '31'));
+
+	global $conexion;
+	$que = "SELECT * FROM video WHERE recorded_when BETWEEN \"".$from."\" AND \"".$to."\" ORDER BY recorded_when DESC, id DESC";
+	$res = mysqli_query($conexion,$que);
+
+	echo "<table border=\"1\">";
+	echo "<tr>";
+	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
+	echo "</tr>";
+
+	while($video = mysqli_fetch_array($res)){
+		echo "<tr>";
+			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
+		echo "</tr>";
+	}
+
+	echo "</table>";
+
+}
+
+
+function tableOfLast($days, $user = 0){
+
+	$today = date("Y-m-d");
+
+	global $conexion;
+	$que = "SELECT * FROM video WHERE recorded_when >= DATE_SUB(\"".$today."\",INTERVAL ".($days-1)." DAY) ORDER BY recorded_when DESC, id DESC";
+	$res = mysqli_query($conexion,$que);
+
+	echo "<table border=\"1\">";
+	echo "<tr>";
+	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
+	echo "</tr>";
+
+	while($video = mysqli_fetch_array($res)){
+		echo "<tr>";
+			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
+		echo "</tr>";
+	}
+
+	echo "</table>";
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
