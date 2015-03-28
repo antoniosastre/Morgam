@@ -8,6 +8,20 @@
 <div id="wrapper">
     <div id="content">
 
+    <?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
 <h1>Subir Vídeo</h1><br>
 
 <form action="upload-video-engine.php" method="post" enctype="multipart/form-data">
@@ -38,7 +52,9 @@
 
 </form>
 
-
+<?
+}
+?>
 
 </div>
 </div>

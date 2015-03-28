@@ -8,7 +8,25 @@
 <div id="wrapper">
     <div id="content">
 
-<?php echo "<h1>Subir Clips</h1><br>"; ?>
+<?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
+<!-- Insertar el código aquí. -->
+
+<?
+}
+?>
 
 </div>
 </div>

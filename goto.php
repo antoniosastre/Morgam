@@ -8,6 +8,20 @@
 <div id="wrapper">
     <div id="content">
 
+    <?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
 <h1>Ir a...</h1><br>
 
 <table>
@@ -42,6 +56,10 @@
 	</td>
 </tr>
 </table>
+
+<?
+}
+?>
 
 </div>
 </div>

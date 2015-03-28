@@ -8,6 +8,20 @@
 <div id="wrapper">
     <div id="content">
 
+    <?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
 <?php echo "<h1>Vídeo ".$_GET['id']."</h1><br>"; 
 
 
@@ -44,6 +58,10 @@ echo  " data-setup='{\"example_option\":true}'>
 
 
 
+?>
+
+<?
+}
 ?>
 
 </div>

@@ -7,8 +7,10 @@
 <script src="js/video-js/video.js"></script>
 <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
-<?php include 'config.php';
-include 'db.php';
+<?php   
+include 'config.php';
+        include 'db.php';
+if(isValidCookie("morgam")){
 		?>
 <script type="text/javascript">
 
@@ -40,3 +42,5 @@ include 'db.php';
 
     });
 </script>
+
+<? } ?>

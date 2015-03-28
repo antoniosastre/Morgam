@@ -8,6 +8,20 @@
 <div id="wrapper">
     <div id="content">
 
+    <?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
 <?php
 
 //This function separates the extension from the rest of the file name and returns it
@@ -94,6 +108,10 @@ if ($uploadOk==0){
 	}
 
 
+?>
+
+<?
+}
 ?>
 
 </div>

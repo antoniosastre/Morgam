@@ -8,6 +8,25 @@
 <div id="wrapper">
     <div id="content">
 
+<?php 
+
+if(!isValidCookie("morgam")){
+
+?>
+
+Debe iniciar sesión<br>
+
+<?
+
+}else{
+
+?>
+
+<h1>Buscar</h1><br>
+
+<?
+}
+?>
 
 </div>
 </div>

@@ -284,4 +284,40 @@ function generateRandomString($length = 8) {
     return $randomString;
 }
 
+function isValidCookie($cookie){
+
+	if(!isset($_COOKIE[$cookie])) return false;
+
+	$exploded = explode("-and-", $_COOKIE[$cookie]);
+
+	$user = $exploded[0];
+	$code = $exploded[1];
+
+	global $conexion;
+	$que = "SELECT lastcookiegiven FROM users WHERE user='".$user."'";
+	$res = mysqli_query($conexion,$que);
+	$linea = mysqli_fetch_array($res);
+	
+	if($linea['lastcookiegiven'] == $code && strlen($linea['lastcookiegiven']) == 8){
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
