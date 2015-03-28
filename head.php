@@ -8,7 +8,7 @@
 <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
 <?php include 'config.php';
-		include 'db.php';
+include 'db.php';
 		?>
 <script type="text/javascript">
 

@@ -4,17 +4,19 @@ date_default_timezone_set('Europe/Madrid');
 
 $conexion = mysqli_connect("localhost", "root", "tesla1856", "morgam");
 //echo "<div id=\"dbstatus\">DB: ";
-if (mysqli_connect_errno($conexion))
-  {
-  echo "ERR." . mysqli_connect_error();
-  }else{
-  echo "<img src=\"img/green.png\" width=\"18\" height=\"18\">";
-  }
+
   if (!$conexion->set_charset("utf8")) {
     printf(" Error cargando el conjunto de caracteres utf8: %s\n", $conexion->error);
 }
 // echo "</div>";
 
+function dbstatus(){
+	if (mysqli_connect_errno($conexion)){
+  		echo "ERR." . mysqli_connect_error();
+  	}else{
+  		echo "<img src=\"img/green.png\" width=\"18\" height=\"18\">";
+  	}
+}
 
 function videoById($id){
 	global $conexion;
@@ -47,6 +49,14 @@ function fechaSQL($fecha){
 function userShowNameById($id){
 	global $conexion;
 	$que = "SELECT showname FROM users WHERE id='".$id."'";
+	$res = mysqli_query($conexion,$que);
+	$linea = mysqli_fetch_array($res);
+	return $linea['showname'];
+}
+
+function userShowNameByUser($user){
+	global $conexion;
+	$que = "SELECT showname FROM users WHERE user='".$user."'";
 	$res = mysqli_query($conexion,$que);
 	$linea = mysqli_fetch_array($res);
 	return $linea['showname'];
@@ -232,5 +242,46 @@ function tagsArray(){
 
 }
 
+function logincredentials($user, $password){
+
+	global $conexion;
+	$que = "SELECT * FROM users WHERE user='".$user."'";
+	$res = mysqli_query($conexion,$que);
+
+	if(empty($res)){
+		return false;
+	}else{
+		$linea = mysqli_fetch_array($res);
+		
+		if(password_verify($password , $linea['password'])){
+			return true;
+		}
+		return false;
+	}
+
+
+}
+
+function lastgivencookie($user){
+
+	global $conexion;
+
+	$random = generateRandomString();
+
+	$que = "UPDATE users SET lastcookiegiven=\"".$random."\" WHERE user=\"".$user."\"";
+	mysqli_query($conexion,$que);
+
+	return $random;
+}
+
+function generateRandomString($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
 ?>
