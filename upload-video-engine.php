@@ -1,6 +1,7 @@
 <html>
 	<head>
-	<?php include 'head.php' ?>
+	<?php include 'head.php';
+		  require_once('getid3/getid3.php'); ?>
 	</head>
 	<body>
 		<?php include 'topmenu.php'; ?>
@@ -33,8 +34,10 @@ function findexts ($filename){
 	return $exts;
 }
 
+require_once 'functions.php';
+
 $ext = findexts($_FILES['fileToUpload']['name']) ;
-$newfilename = date('U');
+$tmpfilename = generateRandomString();
 
 $target_dir = "storage/".date('Y')."/".date('m')."/".date('d')."/";
 
@@ -42,7 +45,7 @@ if (!is_dir($target_dir)) {
     mkdir($target_dir, 0777, true);    
 }
 
-$target_file = $target_dir . $newfilename .".". $ext;
+$tmp_target_file = $target_dir . $tmpfilename .".". $ext;
 $uploadOk = 1;
 
 //This is our size condition 
@@ -78,20 +81,31 @@ if ($uploadOk==0){
 //If everything is ok we try to upload it  
 
 	else{
-		if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
+		if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $tmp_target_file)){
 			echo "El archivo ". basename( $_FILES['fileToUpload']['name']). " ha sido subido correctamente.<br>";
 
 			//echo "Datos del vídeo: <br>";
-
 			//echo "Title: ".$_POST['title']."<br>";
 			//echo "Recorded_when: ".$_POST['recorded_when']."<br>";
 			//echo "Type: ".$_FILES["fileToUpload"]["type"]."<br>";
-			//echo "Path: ".$target_file."<br>";
+			//echo "Path: ".$tmp_target_file."<br>";
 
-			$idinsertedmedia = insertVideoInfo($_POST['title'], $_POST['recorded_when'], 1, 100, 200, $_FILES["fileToUpload"]["type"], $target_file);
+			$getID3 = new getID3;
+
+			$ThisFileInfo = $getID3->analyze($tmp_target_file);
+
+
+
+			$idinsertedmedia = insertVideoInfo($_POST['title'], $_POST['recorded_when'], userIdByUser(explode("-and-", $_COOKIE['morgam'])[0]), $ThisFileInfo['playtime_seconds'], $tmp_target_file, $_FILES["fileToUpload"]["size"], $_FILES["fileToUpload"]["type"], $ThisFileInfo['video']['resolution_x'], $ThisFileInfo['video']['resolution_y'], $ThisFileInfo['video']['frame_rate']);
+			// insertVideoInfo($title, $recorded_when, $recorded_who, $length, $pathtofile, $size, $type, $resolutionx, $resolutiony, $framerate)
 
 			if($idinsertedmedia != -1){
 
+				$def_target_file = $target_dir ."v-". $idinsertedmedia .".". $ext;
+
+				if(rename($tmp_target_file, $def_target_file)){
+					updateFilenameInDB($idinsertedmedia, $def_target_file);
+				}
 				processPeople($idinsertedmedia, $_POST['people']);
 				processPlaces($idinsertedmedia, $_POST['places']);
 				processTags($idinsertedmedia, $_POST['tags']);
@@ -100,10 +114,6 @@ if ($uploadOk==0){
 
 		}else{ 
 			echo "El archivo no ha podido ser subido correctamente.<br>"; 
-			echo $_FILES['fileToUpload']['tmp_name'];
-			echo "<br>";
-			echo  $target_file;
-			echo "<br>";
 		}  
 	}
 

@@ -7,6 +7,11 @@
 <script src="js/video-js/video.js"></script>
 <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
 <?php   
 include 'config.php';
         include 'db.php';

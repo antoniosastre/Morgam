@@ -22,7 +22,11 @@ Debe iniciar sesión<br>
 
 ?>
 
-<?php echo "<h1>Vídeo ".$_GET['id']."</h1><br>"; 
+<?php 
+
+require_once 'functions.php';
+
+echo "<h1>Vídeo ".$_GET['id']."</h1><br>"; 
 
 
 $video = videoById($_GET['id']);

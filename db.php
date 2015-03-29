@@ -14,7 +14,7 @@ function dbstatus(){
 	if (mysqli_connect_errno($conexion)){
   		echo "ERR." . mysqli_connect_error();
   	}else{
-  		echo "<img src=\"img/green.png\" width=\"18\" height=\"18\" style=\"position: relative; top: 4px; \">";
+  		echo "<img src=\"img/green.png\" width=\"18\" height=\"18\" style=\"position: relative; top: 0px; \">";
   	}
 }
 
@@ -26,24 +26,6 @@ function videoById($id){
 	$res = mysqli_query($conexion,$que);
 	$linea = mysqli_fetch_array($res);
 	return $linea;
-}
-
-function fechaNormal($fecha){
-	if ($fecha){
-	preg_match( "#([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})#", $fecha, $mifecha); 
-	$lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
-	return $lafecha;
-	}
-	return null;
-}
-
-function fechaSQL($fecha){
-	if ($fecha){
-	preg_match( "#([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})#", $fecha, $mifecha);
-	$lafecha=$mifecha[3]."-".$mifecha[2]."-".$mifecha[1];
-	return $lafecha;
-	}
-	return null;
 }
 
 function userShowNameById($id){
@@ -78,12 +60,16 @@ function userIdByUser($user){
 	return $linea['id'];
 }
 
-function insertVideoInfo($title, $recorded_when, $recorded_who, $length, $size, $type, $pathtofile){
+function insertVideoInfo($title, $recorded_when, $recorded_who, $length, $pathtofile, $size, $type, $resolutionx, $resolutiony, $framerate){
 
-if(!empty($title) && !empty($recorded_when) && !empty($type)  && !empty($pathtofile)){
+if(!empty($title) && !empty($recorded_when) && !empty($recorded_who) && !empty($type)  && !empty($pathtofile)){
 
 		global $conexion;
-		$que = "INSERT INTO video (title, recorded_when, recorded_who, length, pathtofile, size, type) VALUES (\"".$title."\",\"".$recorded_when."\",\"".$recorded_who."\",\"".$length."\",\"".$pathtofile."\",\"".$size."\",\"".$type."\")";
+
+		$length = round($length,1);
+		$framerate = round($framerate,2);
+
+		$que = "INSERT INTO video (title, recorded_when, recorded_who, length, pathtofile, size, type, resolutionx, resolutiony, framerate) VALUES (\"".$title."\",\"".$recorded_when."\",\"".$recorded_who."\",\"".$length."\",\"".$pathtofile."\",\"".$size."\",\"".$type."\",\"".$resolutionx."\",\"".$resolutiony."\",\"".$framerate."\")";
 		if(mysqli_query($conexion,$que)){
 			echo "Los datos del vídeo se han registrado correctamente.<br>";
 			return mysqli_insert_id($conexion);
@@ -280,6 +266,8 @@ function logincredentials($user, $password){
 
 function lastgivencookie($user){
 
+	require_once 'functions.php';
+
 	global $conexion;
 
 	$random = generateRandomString();
@@ -290,15 +278,6 @@ function lastgivencookie($user){
 	return $random;
 }
 
-function generateRandomString($length = 8) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
 function isValidCookie($cookie){
 
@@ -338,6 +317,8 @@ function videoYears(){
 
 function tableOfYear($year, $user = 0){
 
+	require_once 'functions.php';
+
 	global $conexion;
 	if(empty($user)){
 		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" ORDER BY recorded_when DESC, id DESC";
@@ -346,23 +327,14 @@ function tableOfYear($year, $user = 0){
 	}
 	$res = mysqli_query($conexion,$que);
 
-	echo "<table border=\"1\">";
-	echo "<tr>";
-	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
-	echo "</tr>";
-
-	while($video = mysqli_fetch_array($res)){
-		echo "<tr>";
-			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
-		echo "</tr>";
-	}
-
-	echo "</table>";
+	printVideoRows($res);
 
 }
 
 
 function tableOfInterval($from, $to, $user = 0){
+
+	require_once 'functions.php';
 
 	$from = implode('-', array($from, '01'));
 	$to = implode('-', array($to, '31'));
@@ -371,23 +343,14 @@ function tableOfInterval($from, $to, $user = 0){
 	$que = "SELECT * FROM video WHERE recorded_when BETWEEN \"".$from."\" AND \"".$to."\" ORDER BY recorded_when DESC, id DESC";
 	$res = mysqli_query($conexion,$que);
 
-	echo "<table border=\"1\">";
-	echo "<tr>";
-	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
-	echo "</tr>";
-
-	while($video = mysqli_fetch_array($res)){
-		echo "<tr>";
-			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
-		echo "</tr>";
-	}
-
-	echo "</table>";
+	printVideoRows($res);
 
 }
 
 
 function tableOfLast($days, $user = 0){
+
+	require_once 'functions.php';
 
 	$today = date("Y-m-d");
 
@@ -395,22 +358,17 @@ function tableOfLast($days, $user = 0){
 	$que = "SELECT * FROM video WHERE recorded_when >= DATE_SUB(\"".$today."\",INTERVAL ".($days-1)." DAY) ORDER BY recorded_when DESC, id DESC";
 	$res = mysqli_query($conexion,$que);
 
-	echo "<table border=\"1\">";
-	echo "<tr>";
-	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Por</td><td>Duración</td><td>Peso</td><td>Tipo</td>";
-	echo "</tr>";
-
-	while($video = mysqli_fetch_array($res)){
-		echo "<tr>";
-			echo "<td>".$video['id']."</td>"."<td>".$video['title']."</td>"."<td>".$video['recorded_when']."</td>"."<td>".userShowNameById($video['recorded_who'])."</td>"."<td>".$video['length']."</td>"."<td>".$video['size']."</td>"."<td>".$video['type']."</td>";
-		echo "</tr>";
-	}
-
-	echo "</table>";
+	printVideoRows($res);
 
 }
 
+function updateFilenameInDB($idinsertedmedia, $def_target_file){
 
+	global $conexion;
+	$que = "UPDATE video SET pathtofile=\"".$def_target_file."\" WHERE id=\"".$idinsertedmedia."\"";
+	$res = mysqli_query($conexion,$que);
+	
+}
 
 
 
