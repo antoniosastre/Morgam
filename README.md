@@ -1,31 +1,45 @@
-# ${1:Project Name}
+# Morgam FreeMAM
 
-TODO: Write a project description
+Morgam es un software ligero y fácil de usar para administrar activos de vídeo.
 
-## Installation
+## Instalación
 
-TODO: Describe the installation process
+#### ¡Aviso!
 
-## Usage
+Este proyecto está todavía en proceso de desarrollo y por lo tanto no es estable, no funciona y no es instalable.
 
-TODO: Write usage instructions
+## Uso
 
-## Contributing
+El propósito original de este software es proporcionar un sistema centralizado de almacenamiento y catalogación de activos de vídeo para su posterior consulta y uso.
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+Al ser sencillo y ligero, es ideal para ser instalado en un servidor NAS de características medias o superior.
 
-## History
+Puede ser usado por cadenas de televisión locales, pequeñas productoras, creativos de vídeo, videógrafos, etc.
 
-TODO: Write history
+## Requisitos
 
-## Credits
+* Servidor Apache
+* PHP
+* MySQL
 
-TODO: Write credits
+## Hisoria
 
-## License
+En proceso de desarrollo.
 
-TODO: Write license
+## Creditos
+
+[Antonio Sastre](mailto:github@sastre.es)
+
+## Licencia
+
+**Este software se distribuye bajo una licencia MIT salvo aquellas partes que se distribuyan bajo otro tipo de licencias.**
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Antonio Sastre
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
