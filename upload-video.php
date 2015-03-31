@@ -1,9 +1,30 @@
+<!DOCTYPE HTML>
+<?php 
+
+require_once 'db.php';
+
+if(!isValidCookie("morgam")){
+
+?>
+
 <html>
 	<head>
-	<?php include 'head.php';
+	<meta http-equiv="refresh" content="1;url=login.php">
+        <script type="text/javascript">
+            window.location.href = "login.php"
+        </script>
+	</head>
+</html>
 
-if(isValidCookie("morgam")){
-		?>
+<?
+
+}else{
+
+?>
+
+<html>
+	<head>
+	<?php include 'head.php'; ?>
 <script type="text/javascript">
 
 	
@@ -34,40 +55,21 @@ if(isValidCookie("morgam")){
 
     });
 </script>
-
-<? } ?>
-
-
 	</head>
 	<body>
 		<?php include 'topmenu.php'; ?>
 		
-<div id="wrapper">
-    <div id="content">
-
-    <?php 
-
-if(!isValidCookie("morgam")){
-
-?>
-
-Debe iniciar sesión<br>
-
-<?
-
-}else{
-
-?>
+<div class="container">
 
 <h1>Subir Vídeo</h1><br>
 
 <form action="upload-video-engine.php" method="post" enctype="multipart/form-data">
     
 	Título: <br>
-	<input type"text" name="title" id="title"><br><br>
+	<input type"text" name="title" id="title" required><br><br>
 
 	Grabado el:<br>
-	<input type="date" name="recorded_when" id="recorded_when"><br><br>
+	<input type="date" name="recorded_when" id="recorded_when" required><br><br>
 
 	Personas: <br>
 	<input name="people" class="input_people">
@@ -82,20 +84,19 @@ Debe iniciar sesión<br>
 	<br>
 
 	Archivo: <br>
-    <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+    <input type="file" name="fileToUpload" id="fileToUpload" accept=".mpg, .mp4, .avi, .xvid, .mkv, .wmv, .mov" required><br><br>
 
     Enviar: <br>
     <input type="submit" value="Subir Vídeo" name="submit"><br><br>
 
 </form>
 
-<?
-}
-?>
-
-</div>
 </div>
 
 		
 	</body>
 </html>
+
+<?
+}
+?>

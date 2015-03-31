@@ -14,10 +14,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Inicio</a></li>
-        <li><a href="list.php">Lista</a></li>
+        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
+        <li><a href="list.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista</a></li>
         <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ir a...<span class="caret"></span></a>
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Ir a...<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><form action="video.php" method="GET" class="navbar-form navbar-left">
         <div class="form-group">
@@ -25,16 +25,22 @@
         </div>
     
       </form></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+     
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+
+<li><form action="user.php" method="GET" class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" name="u" placeholder="Usuario">
+        </div>
+    
+      </form></li>
+
+  
             <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
 
-        <li><a href="upload-video.php">Subir vídeo</a></li>
+        <li><a href="upload-video.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subir vídeo</a></li>
 
       </ul>
       <form action="search.php" method="GET" class="navbar-form navbar-left" role="search">
@@ -51,9 +57,9 @@ if(isValidCookie("morgam")){
 	echo "<li class=\"dropdown\">
           <a href=\"user.php\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">".userShowNameByUser(explode("-and-", $_COOKIE['morgam'])[0])."<span class=\"caret\"></span></a>
           <ul class=\"dropdown-menu\" role=\"menu\">
-          	<li><a href=\"user.php\"> Página de usuario</a></li>
+          	<li><a href=\"user.php\"><span class=\"glyphicon glyphicon-film\" aria-hidden=\"true\"></span>  Página de usuario</a></li>
           	<li class=\"divider\"></li>
-            <li><a href=\"user.php?a=close\">Cerrar Sesión</a></li>
+            <li><a href=\"user.php?a=close\"><span class=\"glyphicon glyphicon-log-out\" aria-hidden=\"true\"></span> Cerrar Sesión</a></li>
           </ul>
         </li>";
 

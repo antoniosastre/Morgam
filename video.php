@@ -1,3 +1,27 @@
+<!DOCTYPE HTML>
+<?php 
+
+require_once 'db.php';
+
+if(!isValidCookie("morgam")){
+
+?>
+
+<html>
+	<head>
+	<meta http-equiv="refresh" content="1;url=login.php">
+        <script type="text/javascript">
+            window.location.href = "login.php"
+        </script>
+	</head>
+</html>
+
+<?
+
+}else{
+
+?>
+
 <html>
 	<head>
 	<?php include 'head.php' ?>
@@ -5,22 +29,7 @@
 	<body>
 		<?php include 'topmenu.php'; ?>
 		
-<div id="wrapper">
-    <div id="content">
-
-    <?php 
-
-if(!isValidCookie("morgam")){
-
-?>
-
-Debe iniciar sesión<br>
-
-<?
-
-}else{
-
-?>
+<div class="container">
 
 <?php 
 
@@ -53,7 +62,7 @@ echo "<br><br>";
 echo "<video id=\"video-".$video['id']."\" class=\"video-js vjs-default-skin vjs-big-play-centered\"
   controls preload=\"auto\" width=\"640\" height=\"360\"";
 
-//echo "poster=\"http://video-js.zencoder.com/oceans-clip.png\"";
+  //echo "poster=\"http://video-js.zencoder.com/oceans-clip.png\"";
 
 echo  " data-setup='{\"example_option\":true}'>
  <source src=\"".$video['pathtofile']."\" type='".$video['type']."' />
@@ -61,16 +70,13 @@ echo  " data-setup='{\"example_option\":true}'>
 </video>";
 
 
-
 ?>
+
+</div>
+		
+	</body>
+</html>
 
 <?
 }
 ?>
-
-</div>
-</div>
-
-		
-	</body>
-</html>

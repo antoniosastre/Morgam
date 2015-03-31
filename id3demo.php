@@ -22,7 +22,7 @@ require_once('getid3/getid3.php');
 $getID3 = new getID3;
 
 // Analyze file and store returned data in $ThisFileInfo
-$ThisFileInfo = $getID3->analyze("storage/2015/03/28/v-22.mp4");
+$ThisFileInfo = $getID3->analyze("storage/2015/03/29/v-1.mp4");
 
 /*
  Optional: copies data from all subarrays of [tags] into [comments] so

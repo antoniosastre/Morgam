@@ -1,11 +1,45 @@
+<!DOCTYPE HTML>
 <?php
 
 if($_GET['a']=="close"){
 	setcookie('morgam', $_POST['user'], time() - 86400, "/"); // 86400 = 1 day
-}
+
+	echo "<html>
+	<head>
+	<meta http-equiv=\"refresh\" content=\"1;url=index.php\">
+        <script type=\"text/javascript\">
+            window.location.href = \"index.php\"
+        </script>
+	</head>
+</html>";
+
+}else{
 
 ?>
 
+
+<?php 
+
+require_once 'db.php';
+
+if(!isValidCookie("morgam")){
+
+?>
+
+<html>
+	<head>
+	<meta http-equiv="refresh" content="1;url=login.php">
+        <script type="text/javascript">
+            window.location.href = "login.php"
+        </script>
+	</head>
+</html>
+
+<?
+
+}else{
+
+?>
 
 <html>
 	<head>
@@ -14,22 +48,7 @@ if($_GET['a']=="close"){
 	<body>
 		<?php include 'topmenu.php'; ?>
 		
-<div id="wrapper">
-    <div id="content">
-
-<?php 
-
-if(!isValidCookie("morgam")){
-
-?>
-
-Debe iniciar sesión<br>
-
-<?
-
-}else{
-
-?>
+<div class="container">
 
 <?php 
 
@@ -45,13 +64,8 @@ Debe iniciar sesión<br>
 
 	}
 
-	if(!isset($_GET['u']) || $_GET['u'] == $userdata['user']){
-
-		echo "<a href=\"user.php?a=close\">Cerrar sesión</a><br><br>";
-
-	}
 ?>
-<br><br><br>
+<br><br>
 <form action="user.php" method="GET">
 <?php
 if(!isset($_GET['u'])){
@@ -123,19 +137,12 @@ if(!empty($_GET['d'])){
 
 ?>
 
-
-
-
-
-
-
-<?
-}
-?>
-
-</div>
 </div>
 
 		
 	</body>
 </html>
+
+<?
+} }
+?>

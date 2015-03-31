@@ -1,26 +1,36 @@
-<html>
-	<head>
-	<?php include 'head.php' ?>
-	</head>
-	<body>
-		<?php include 'topmenu.php'; ?>
-		
-<div id="wrapper">
-    <div id="content">
-
+<!DOCTYPE HTML>
 <?php 
+
+require_once 'db.php';
 
 if(!isValidCookie("morgam")){
 
 ?>
 
-Debe iniciar sesión<br>
+<html>
+	<head>
+	<meta http-equiv="refresh" content="1;url=login.php">
+        <script type="text/javascript">
+            window.location.href = "login.php"
+        </script>
+	</head>
+</html>
 
 <?
 
 }else{
 
 ?>
+
+<html>
+	<head>
+	<?php require_once 'head.php' ?>
+	</head>
+	<body>
+
+<?php require_once 'topmenu.php'; ?>
+		
+<div class="container">
 
 <h1>Inicio</h1>
 
@@ -45,13 +55,12 @@ $hddrem = 100-$hdd;
   </div>
 </div>
 
+</div>
+
+</body>
+</html>
+
+
 <?
 }
 ?>
-
-</div>
-</div>
-
-		
-	</body>
-</html>

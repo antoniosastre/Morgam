@@ -1,28 +1,23 @@
+<!DOCTYPE HTML>
 <html>
 	<head>
 	<?php include 'head.php' ?>
+	<link rel="stylesheet" href="css/signin.css">
 	</head>
 	<body>
-		<?php include 'topmenu.php'; ?>
-		
-<div id="wrapper">
-    <div id="content">
 
-<h1>Iniciar Sesión</h1>
+<div class="container">
 
-<form action="login-engine.php" method="POST" enctype="multipart/form-data">
+      <form class="form-signin" action="login-engine.php" method="POST" enctype="multipart/form-data">
+        <h2 class="form-signin-heading">Inicio de sesión</h2>
+        <label for="inputUser" class="sr-only">Usuario</label>
+        <input type="text" id="inputUser" class="form-control" placeholder="Usuario" name="user" required autofocus>
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" name="password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+      </form>
 
-Usuario:<br>
-<input type="text" name="user"><br><br>
-Contraseña:<br>
-<input type="password" name="password"><br><br>
-<input type="submit" value="Iniciar Sesión">
+    </div> <!-- /container -->
 
-</form>
-
-</div>
-</div>
-
-		
-	</body>
+    </body>
 </html>

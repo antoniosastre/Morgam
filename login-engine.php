@@ -1,6 +1,7 @@
-<html>
-	<head>
-	<?php include 'head.php';
+<!DOCTYPE HTML>
+<?php 
+
+require_once 'db.php';
 
 	if(!isValidCookie("morgam")){
 
@@ -24,39 +25,11 @@
 
 ?>
 
+<html>
+	<head>
+	<meta http-equiv="refresh" content="1;url=index.php">
+        <script type="text/javascript">
+            window.location.href = "index.php"
+        </script>
 	</head>
-	<body>
-
-<?php include 'topmenu.php'; ?>
-		
-<div id="wrapper">
-    <div id="content">
-
-<?php
-
-switch ($loginerror) {
-	case 0:
-		echo "Sesión iniciada.";
-		break;
-
-	case 1:
-		echo "Combinación de Usuario / Contraseña incorrecta.";
-		break;
-
-	case 2:
-		echo "Ya tiene una sesión iniciada.";
-		break;
-	
-	default:
-		echo "Error en el inicio de sesión.";
-		break;
-}
-
-?>
-
-</div>
-</div>
-
-		
-	</body>
 </html>

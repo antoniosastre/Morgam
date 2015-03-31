@@ -1,3 +1,27 @@
+<!DOCTYPE HTML>
+<?php 
+
+require_once 'db.php';
+
+if(!isValidCookie("morgam")){
+
+?>
+
+<html>
+	<head>
+	<meta http-equiv="refresh" content="1;url=login.php">
+        <script type="text/javascript">
+            window.location.href = "login.php"
+        </script>
+	</head>
+</html>
+
+<?
+
+}else{
+
+?>
+
 <html>
 	<head>
 	<?php include 'head.php';
@@ -6,22 +30,7 @@
 	<body>
 		<?php include 'topmenu.php'; ?>
 		
-<div id="wrapper">
-    <div id="content">
-
-    <?php 
-
-if(!isValidCookie("morgam")){
-
-?>
-
-Debe iniciar sesión<br>
-
-<?
-
-}else{
-
-?>
+<div class="container">
 
 <?php
 
@@ -57,21 +66,21 @@ if ($_FILES['fileToUpload']['size'] > $MAX_FILE_SIZE){
 
 
 //This is our limit file type condition
-if (!in_array($_FILES["fileToUpload"]["type"], $FILE_TYPES) && !empty($_FILES["fileToUpload"]["type"])){  
-	echo "Archivo no admitido.<br>";
-	echo "Tipo: ".$_FILES["fileToUpload"]["type"] . "<br>";
-	$uploadOk=0;
-}
+//if (!in_array($_FILES["fileToUpload"]["type"], $FILE_TYPES) && !empty($_FILES["fileToUpload"]["type"])){  
+//	echo "Archivo no admitido.<br>";
+//	echo "Tipo: ".$_FILES["fileToUpload"]["type"] . "<br>";
+//	$uploadOk=0;
+//}
 
-if(empty($_FILES["fileToUpload"]["type"])){
-	echo "No se ha podido detectar el tipo de archivo.<br>";
-	//echo "Tipo: ".$_FILES["fileToUpload"]["type"] . "<br>";
-}
+//if(empty($_FILES["fileToUpload"]["type"])){
+//	echo "No se ha podido detectar el tipo de archivo.<br>";
+//	echo "Tipo: ".$_FILES["fileToUpload"]["type"] . "<br>";
+//}
 
-if ($_FILES['fileToUpload']['size'] == 0){
-	echo "No se ha seleccionado ningún archivo.<br>"; 
-	$uploadOk=0;  
-}
+//if ($_FILES['fileToUpload']['size'] == 0){
+//	echo "No se ha seleccionado ningún archivo.<br>"; 
+//	$uploadOk=0;  
+//}
 
 
 if ($uploadOk==0){
@@ -114,19 +123,25 @@ if ($uploadOk==0){
 
 		}else{ 
 			echo "El archivo no ha podido ser subido correctamente.<br>"; 
+
+			//if(rename($_FILES['fileToUpload']['tmp_name'], $tmp_target_file)){
+			//	echo "Se ha movido con la función alternativa.";
+			//}else{
+			//	echo "Todo ha fallado.";
+			//}
+			//echo $_FILES['fileToUpload']['tmp_name'];
 		}  
 	}
 
 
 ?>
 
-<?
-}
-?>
-
-</div>
 </div>
 
 		
 	</body>
 </html>
+
+<?
+}
+?>
