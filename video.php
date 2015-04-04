@@ -48,7 +48,7 @@ echo "<tr>";
 echo "<td colspan=\"2\">Grabado el ".fechaNormal($video['recorded_when'])." por ".userShowNameById($video['recorded_who'])."</td>";
 echo "</tr>";
 echo "<tr>";
-echo "<td>Duración: ".$video['length']." min. </td><td>Tamaño ".$video['size']." MB.</td>";
+echo "<td>Duración: ".secondsToTimeString($video['length'])."</td><td>Tamaño ".bytesToSizeString($video['size']).".</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td colspan=\"2\">Ruta: /".$video['pathtofile']."</td>";

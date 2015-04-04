@@ -37,17 +37,17 @@ if(!isValidCookie("morgam")){
 
 
     $(document).ready(function() {
-            $('.input_people').tagit({
+            $('#input_people').tagit({
                 availableTags: people,
                 allowSpaces: true
             });
 
-            $('.input_places').tagit({
+            $('#input_places').tagit({
                 availableTags: places,
                 allowSpaces: true
             });
 
-            $('.input_tags').tagit({
+            $('#input_tags').tagit({
                 availableTags: tags,
                 allowSpaces: true
             });
@@ -65,31 +65,55 @@ if(!isValidCookie("morgam")){
 
 <form action="upload-video-engine.php" method="post" enctype="multipart/form-data">
     
-	Título: <br>
-	<input type"text" name="title" id="title" required><br><br>
+	<div class="row">
 
-	Grabado el:<br>
-	<input type="date" name="recorded_when" id="recorded_when" required><br><br>
+		<div class="col-md-7">
 
-	Personas: <br>
-	<input name="people" class="input_people">
-	<br>
+		<div class="form-group">
+		<label for="videoSelector">Vídeo:</label>
+		<select name="video" id="videoSelector" class="form-control">
+		<?php 
+		require_once 'functions.php';
+		inboxFilesOptions(); ?>
+		</select>
+		</div>
 
-	Lugares: <br>
-	<input name="places" class="input_places">
-	<br>
+		</div>
+		<div class="col-md-5">
 
-	Etiquetas: <br>
-	<input name="tags" class="input_tags">
-	<br>
+		<div class="form-group">
+		<label for="recorded_when">Grabado el:</label>
+		<input type="date" name="recorded_when" id="recorded_when" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+		</div>
 
-	Archivo: <br>
-    <input type="file" name="fileToUpload" id="fileToUpload" accept=".mpg, .mp4, .avi, .xvid, .mkv, .wmv, .mov" required><br><br>
+		</div>
+	</div>
+    
+    <div class="form-group">
+    <label for="title">Título:</label>
+	<input type"text" name="title" id="title" class="form-control" required>
+	</div>
 
-    Enviar: <br>
-    <input type="submit" value="Subir Vídeo" name="submit"><br><br>
+	<div class="form-group">
+	<label for="input_people">Personas:</label>
+	<input name="people" id="input_people">
+	</div>
+
+	<div class="form-group">
+	<label for="input_places">Lugares:</label>
+	<input name="places" id="input_places">
+	</div>
+
+	<div class="form-group">
+	<label for="input_tags">Etiquetas:</label>
+	<input name="tags" id="input_tags">
+	</div>
+
+    <button type="submit" class="btn btn-default" name="submit">Procesar vídeo</button>
 
 </form>
+
+<br><br>
 
 </div>
 

@@ -165,6 +165,22 @@ function progressBarWord($remaining){
 }
 
 
+function inboxFilesOptions(){
+
+	$files = scandir("inbox");
+
+	for ($i=0; $i < sizeof($files); $i++) {
+
+		if($files[$i] != "." && $files[$i] != ".." && $files[$i] != "@eaDir"){
+		echo "<option value=\"".$i."\">";
+		echo $files[$i];
+		echo "</option>\n";
+	}
+	}
+
+}
+
+
 
 
 ?>

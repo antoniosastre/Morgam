@@ -25,6 +25,7 @@ if(!isValidCookie("morgam")){
 <html>
 	<head>
 	<?php require_once 'head.php' ?>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/estilos_201503181147.css" />
 	</head>
 	<body>
 
@@ -55,6 +56,41 @@ $hddrem = 100-$hdd;
   </div>
 </div>
 
+<div>
+
+<h3>Predicción Ceuta</h3>
+
+<script type="text/javascript" src="js/jquery.flot.js"></script>
+    <script type="text/javascript" src="js/jquery.flot.valuelabels.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+<?php
+
+$meteoURL = "http://www.aemet.es/es/eltiempo/prediccion/municipios/ceuta-id51001#detallada";
+$meteo = file_get_contents($meteoURL); 
+$meteo = utf8_encode($meteo);
+$meteoIDIni = "<table id=\"tabla_prediccion\"";
+$meteoIDFin = "</table>";
+$meteoPosIni = strpos($meteo, $meteoIDIni);
+$meteoPosFin = strpos($meteo, $meteoIDFin, $meteoPosIni);
+$meteoLength = $meteoPosFin-$meteoPosIni;
+$meteo = substr($meteo, $meteoPosIni, $meteoLength)."</table>";
+$meteo = str_replace("/imagenes/", "http://www.aemet.es/imagenes/", $meteo);
+$meteo = str_replace("<table", "<table class=\"table table-bordered table-condensed\" style=\"background-color: white;\"", $meteo);
+
+echo $meteo;
+
+?>
+
+<script type="text/javascript">   
+    $("#tabla_prediccion").css('visibility', 'hidden');	
+    $(document).ready(function () {  	
+    	$("#tabla_prediccion").css('visibility', 'visible');	
+    	});
+    </script>
+
+
+</div>
 </div>
 
 </body>
