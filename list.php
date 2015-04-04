@@ -33,22 +33,40 @@ if(!isValidCookie("morgam")){
 
 <h1>Lista</h1><br>
 
-<form action="list.php" method="GET">
-Año: <select name="y">
-  <?php
-  	foreach (videoYears() as $year) {
- 		if(!empty($year)) echo "<option value=\"".$year."\">".$year."</option>\n";
-  	}
-  ?>
-</select>
-<input type="submit" value="Listar">
+<div class="row">
+
+	<div class="col-md-3" style="position: relative; bottom: -50px;">
+
+<form action="list.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="yearSelector" class="col-sm-2 control-label">Año</label>
+		<div class="col-sm-10">
+		<select name="y" id="yearSelector" class="form-control">
+  			<?php
+  				foreach (videoYears() as $year) {
+ 				if(!empty($year)) echo "<option value=\"".$year."\">".$year."</option>\n";
+  				}
+  			?>
+		</select>
+		</div>
+	</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
 </form>
-<form action="list.php" method="GET">
-Desde: <input type="month" name="f"> Hasta: <input type="month" name="t">
-<input type="submit" value="Listar">
-</form>
-<form action="list.php" method="GET">
-Últimos: <select name="d">
+
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-4"  style="position: relative; bottom: -50px;">
+
+<form action="list.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="daysSelector" class="col-sm-2 control-label">Últimos</label>
+	 <div class="col-sm-10">
+	 <select name="d" id="daysSelector" class="form-control">
   <option value="1">Hoy</option>
   <option value="2">2 Días</option>
   <option value="5">5 Días</option>
@@ -56,8 +74,41 @@ Desde: <input type="month" name="f"> Hasta: <input type="month" name="t">
   <option value="15">15 Días</option>
   <option value="30">30 Días</option>
 </select>
-<input type="submit" value="Listar">
+	</div>
+	</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
 </form>
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-3">
+
+<form action="list.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="fromSelector" class="col-sm-2 control-label">Desde</label>
+		<div class="col-sm-10">
+		<input type="month" name="f" id="fromSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="toSelector" class="col-sm-2 control-label">Hasta</label>
+		<div class="col-sm-10">
+		<input type="month" name="t" id="toSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
+		</div>
+	</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
+</form>
+	</div>
+	</div>
 
 <hr>
 <?php
@@ -84,6 +135,7 @@ if(!empty($_GET['d'])){
 
 </div>
 
+<br><br><br>
 		
 	</body>
 </html>

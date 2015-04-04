@@ -66,43 +66,46 @@ if(!isValidCookie("morgam")){
 
 ?>
 <br><br>
-<form action="user.php" method="GET">
-<?php
+<div class="row">
+
+	<div class="col-md-3" style="position: relative; bottom: -50px;">
+
+<form action="user.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="yearSelector" class="col-sm-2 control-label">Año</label>
+		<div class="col-sm-10">
+		<select name="y" id="yearSelector" class="form-control">
+  			<?php
+  				foreach (videoYears() as $year) {
+ 				if(!empty($year)) echo "<option value=\"".$year."\">".$year."</option>\n";
+  				}
+  			?>
+		</select>
+		</div>
+	</div>
+	<?php
 if(!isset($_GET['u'])){
 		echo "<input type=\"hidden\" name=\"u\" value=\"".$userdata['user']."\">";
 	}else{
 		echo "<input type=\"hidden\" name=\"u\" value=\"".$_GET['u']."\">";
 	}
 ?>
-Año: <select name="y">
-  <?php
-  	foreach (videoYears() as $year) {
- 		if(!empty($year)) echo "<option value=\"".$year."\">".$year."</option>\n";
-  	}
-  ?>
-</select>
-<input type="submit" value="Listar">
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
 </form>
-<form action="user.php" method="GET">
-<?php
-if(!isset($_GET['u'])){
-		echo "<input type=\"hidden\" name=\"u\" value=\"".$userdata['user']."\">";
-	}else{
-		echo "<input type=\"hidden\" name=\"u\" value=\"".$_GET['u']."\">";
-	}
-?>
-Desde: <input type="month" name="f"> Hasta: <input type="month" name="t">
-<input type="submit" value="Listar">
-</form>
-<form action="user.php" method="GET">
-<?php
-if(!isset($_GET['u'])){
-		echo "<input type=\"hidden\" name=\"u\" value=\"".$userdata['user']."\">";
-	}else{
-		echo "<input type=\"hidden\" name=\"u\" value=\"".$_GET['u']."\">";
-	}
-?>
-Últimos: <select name="d">
+
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-4"  style="position: relative; bottom: -50px;">
+
+<form action="user.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="daysSelector" class="col-sm-2 control-label">Últimos</label>
+	 <div class="col-sm-10">
+	 <select name="d" id="daysSelector" class="form-control">
   <option value="1">Hoy</option>
   <option value="2">2 Días</option>
   <option value="5">5 Días</option>
@@ -110,27 +113,72 @@ if(!isset($_GET['u'])){
   <option value="15">15 Días</option>
   <option value="30">30 Días</option>
 </select>
-<input type="submit" value="Listar">
+	</div>
+	</div>
+	<?php
+if(!isset($_GET['u'])){
+		echo "<input type=\"hidden\" name=\"u\" value=\"".$userdata['user']."\">";
+	}else{
+		echo "<input type=\"hidden\" name=\"u\" value=\"".$_GET['u']."\">";
+	}
+?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
 </form>
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-3">
+
+<form action="user.php" method="GET" class="form-horizontal">
+	<div class="form-group">
+		<label for="fromSelector" class="col-sm-2 control-label">Desde</label>
+		<div class="col-sm-10">
+		<input type="month" name="f" id="fromSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="toSelector" class="col-sm-2 control-label">Hasta</label>
+		<div class="col-sm-10">
+		<input type="month" name="t" id="toSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
+		</div>
+	</div>
+	<?php
+if(!isset($_GET['u'])){
+		echo "<input type=\"hidden\" name=\"u\" value=\"".$userdata['user']."\">";
+	}else{
+		echo "<input type=\"hidden\" name=\"u\" value=\"".$_GET['u']."\">";
+	}
+?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-default">Listar</button>
+</div>
+</div>
+</form>
+	</div>
+	</div>
 
 <hr>
 
 <?php
 
 if(!empty($_GET['y'])){
-	echo "Se muestran todos los vídeos de ".$_GET['y'].":";
+	echo "Se muestran todos los vídeos de ".$_GET['y']." de ".userShowNameByUser($_GET['u']).":";
 	echo "<hr>";
 	echo tableOfYear($_GET['y'],$_GET['u']);
 }
 
 if(!empty($_GET['f']) && !empty($_GET['t'])){
-	echo "Se muestra desde el ".explode('-', $_GET['f'])[1]."/".explode('-', $_GET['f'])[0]." hasta el ".explode('-', $_GET['t'])[1]."/".explode('-', $_GET['t'])[0].":";
+	echo "Se muestra desde el ".explode('-', $_GET['f'])[1]."/".explode('-', $_GET['f'])[0]." hasta el ".explode('-', $_GET['t'])[1]."/".explode('-', $_GET['t'])[0]." de ".userShowNameByUser($_GET['u']).":";
 	echo "<hr>";
 	echo tableOfInterval($_GET['f'], $_GET['t'],$_GET['u']);
 }
 
 if(!empty($_GET['d'])){
-	echo "Se muestran los últimos ".$_GET['d']." días:";
+	echo "Se muestran los últimos ".$_GET['d']." días de ".userShowNameByUser($_GET['u']).":";;
 	echo "<hr>";
 	echo tableOfLast($_GET['d'],$_GET['u']);
 }
@@ -139,6 +187,7 @@ if(!empty($_GET['d'])){
 
 </div>
 
+<br><br><br>
 		
 	</body>
 </html>

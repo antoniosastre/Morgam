@@ -105,10 +105,11 @@ function secondsToTimeString($init){
 
 function printVideoRows($res){
 
-	echo "<table border=\"1\">";
-	echo "<tr>";
-	echo "<td>ID</td><td>Título</td><td>Grabado</td><td>Duración</td><td>Peso</td><td>Resolución</td><td>FPS</td><td>Tipo</td>";
-	echo "</tr>";
+	echo "<table class=\"table table-striped table-bordered\">";
+
+	echo "<thead><tr>";
+	echo "<th>ID</th><th>Título</th><th>Grabado</th><th>Duración</th><th>Peso</th><th>Resolución</th><th>FPS</th><th>Tipo</th>";
+	echo "</tr></thead><tbody>";
 
 	while($video = mysqli_fetch_array($res)){
 
@@ -117,7 +118,7 @@ function printVideoRows($res){
 		echo "</tr>";
 	}
 
-	echo "</table>";
+	echo "</tbody></table>";
 
 }
 

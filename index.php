@@ -56,13 +56,15 @@ $hddrem = 100-$hdd;
   </div>
 </div>
 
-<div>
+
 
 <h3>Predicción Ceuta</h3>
 
 <script type="text/javascript" src="js/jquery.flot.js"></script>
-    <script type="text/javascript" src="js/jquery.flot.valuelabels.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.flot.valuelabels.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+<div style="display: block; width: 940px; margin-left: auto; margin-right: auto;">
 
 <?php
 
@@ -76,21 +78,14 @@ $meteoPosFin = strpos($meteo, $meteoIDFin, $meteoPosIni);
 $meteoLength = $meteoPosFin-$meteoPosIni;
 $meteo = substr($meteo, $meteoPosIni, $meteoLength)."</table>";
 $meteo = str_replace("/imagenes/", "http://www.aemet.es/imagenes/", $meteo);
-$meteo = str_replace("<table", "<table class=\"table table-bordered table-condensed\" style=\"background-color: white;\"", $meteo);
+$meteo = str_replace("<table", "<table class=\"table table-bordered table-condensed\" style=\"background-color: white; font-size:85%;\"", $meteo);
 
 echo $meteo;
 
 ?>
 
-<script type="text/javascript">   
-    $("#tabla_prediccion").css('visibility', 'hidden');	
-    $(document).ready(function () {  	
-    	$("#tabla_prediccion").css('visibility', 'visible');	
-    	});
-    </script>
+    </div>
 
-
-</div>
 </div>
 
 </body>
