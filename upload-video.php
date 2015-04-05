@@ -27,8 +27,8 @@ if(!isValidCookie("morgam")){
 	<?php include 'head.php'; ?>
 <script type="text/javascript">
 
-	
-	$(function(){
+  
+  $(function(){
 
 
             var people = <?php echo json_encode(peopleArray()); ?>;

@@ -1,4 +1,23 @@
 <!DOCTYPE HTML>
+<?php
+
+if($_GET['a']=="close"){
+	setcookie('morgam', $_POST['user'], time() - 86400, "/"); // 86400 = 1 day
+
+	echo "<html>
+	<head>
+	<meta http-equiv=\"refresh\" content=\"1;url=index.php\">
+        <script type=\"text/javascript\">
+            window.location.href = \"index.php\"
+        </script>
+	</head>
+</html>";
+
+}else{
+
+?>
+
+
 <?php 
 
 require_once 'db.php';
@@ -24,20 +43,26 @@ if(!isValidCookie("morgam")){
 
 <html>
 	<head>
-	<?php require_once 'head.php' ?>
+	<?php include 'head.php' ?>
 	</head>
 	<body>
-		<?php require_once 'topmenu.php'; ?>
+		<?php include 'topmenu.php'; ?>
 		
 <div class="container">
 
-<h1>Lista</h1><br>
+<?php 
 
+	if(isset($_GET['q'])){
+
+		echo "<h1>".$_GET['q']."</h1>";
+
+?>
+<br><br>
 <div class="row">
 
 	<div class="col-md-3">
 
-<form action="list.php" method="GET" class="form-horizontal">
+<form action="people.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="yearSelector" class="col-sm-3 control-label">Año</label>
 		<div class="col-sm-9">
@@ -50,7 +75,9 @@ if(!isValidCookie("morgam")){
 		</select>
 		</div>
 	</div>
-
+	<?php
+		echo "<input type=\"hidden\" name=\"q\" value=\"".$_GET['q']."\">";
+	?>
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
@@ -62,7 +89,7 @@ if(!isValidCookie("morgam")){
 	<div class="col-md-1"></div>
 	<div class="col-md-3">
 
-<form action="list.php" method="GET" class="form-horizontal">
+<form action="people.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="daysSelector" class="col-sm-3 control-label">Últimos</label>
 	 <div class="col-sm-9">
@@ -76,7 +103,9 @@ if(!isValidCookie("morgam")){
 </select>
 	</div>
 	</div>
-
+	<?php
+		echo "<input type=\"hidden\" name=\"q\" value=\"".$_GET['q']."\">";
+	?>
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
@@ -87,7 +116,7 @@ if(!isValidCookie("morgam")){
 	<div class="col-md-1"></div>
 	<div class="col-md-4">
 
-<form action="list.php" method="GET" class="form-horizontal">
+<form action="people.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="fromSelector" class="col-sm-3 control-label">Desde</label>
 		<div class="col-sm-9">
@@ -100,7 +129,9 @@ if(!isValidCookie("morgam")){
 		<input type="month" name="t" id="toSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
 		</div>
 	</div>
-
+	<?php
+		echo "<input type=\"hidden\" name=\"q\" value=\"".$_GET['q']."\">";
+	?>
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
@@ -111,29 +142,40 @@ if(!isValidCookie("morgam")){
 	</div>
 
 <hr>
+
 <?php
 
 if(!empty($_GET['y'])){
-	echo "Se muestran todos los vídeos de ".$_GET['y'].":";
+	echo "Se muestran todos los vídeos de ".$_GET['y']." de ".$_GET['q'].":";
 	echo "<hr>";
-	echo tableOfYear($_GET['y']);
+	echo tableOfYear($_GET['y'], 0,$_GET['q']);
 }
 
 if(!empty($_GET['f']) && !empty($_GET['t'])){
-	echo "Se muestra desde el ".explode('-', $_GET['f'])[1]."/".explode('-', $_GET['f'])[0]." hasta el ".explode('-', $_GET['t'])[1]."/".explode('-', $_GET['t'])[0].":";
+	echo "Se muestra desde el ".explode('-', $_GET['f'])[1]."/".explode('-', $_GET['f'])[0]." hasta el ".explode('-', $_GET['t'])[1]."/".explode('-', $_GET['t'])[0]." de ".$_GET['q'].":";
 	echo "<hr>";
-	echo tableOfInterval($_GET['f'], $_GET['t']);
+	echo tableOfInterval($_GET['f'], $_GET['t'], 0, $_GET['q']);
 }
 
 if(!empty($_GET['d'])){
-	echo "Se muestran los últimos ".$_GET['d']." días:";
+	echo "Se muestran los últimos ".$_GET['d']." días de ".$_GET['q'].":";;
 	echo "<hr>";
-	echo tableOfLast($_GET['d']);
+	echo tableOfLast($_GET['d'], 0, $_GET['q']);
 }
 
 ?>
 
 </div>
+
+<?
+
+	}else{
+
+		echo "<h1>n/d</h1>";
+
+	}
+
+?>
 
 <br><br><br>
 		
@@ -141,5 +183,5 @@ if(!empty($_GET['d'])){
 </html>
 
 <?
-}
+} }
 ?>

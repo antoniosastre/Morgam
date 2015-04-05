@@ -105,7 +105,7 @@ function secondsToTimeString($init){
 
 function printVideoRows($res){
 
-	echo "<table class=\"table table-striped table-bordered\">";
+	echo "<table class=\"table table-striped table-bordered table-condensed\">";
 
 	echo "<thead><tr>";
 	echo "<th>ID</th><th>Título</th><th>Grabado</th><th>Duración</th><th>Peso</th><th>Resolución</th><th>FPS</th><th>Tipo</th>";
@@ -114,7 +114,7 @@ function printVideoRows($res){
 	while($video = mysqli_fetch_array($res)){
 
 		echo "<tr>";
-			echo "<td>".$video['id']."</td>"."<td><a href=\"video.php?id=".$video['id']."\">".$video['title']."</a></td>"."<td>".fechaNormal($video['recorded_when'])."</td>"."<td>".secondsToTimeString($video['length'])."</td>"."<td>".bytesToSizeString($video['size'])."</td>"."<td>".resolutionString($video['resolutionx'], $video['resolutiony'])."</td>"."<td>".$video['framerate']."</td>"."<td>".$video['type']."</td>";
+			echo "<td class=\"text-right\">".$video['id']."</td>"."<td><a href=\"video.php?id=".$video['id']."\">".$video['title']."</a></td>"."<td class=\"text-center\">".fechaNormal($video['recorded_when'])."</td>"."<td class=\"text-right\">".secondsToTimeString($video['length'])."</td>"."<td class=\"text-right\">".bytesToSizeString($video['size'])."</td>"."<td class=\"text-right\">".resolutionString($video['resolutionx'], $video['resolutiony'])."</td>"."<td class=\"text-center\">".$video['framerate']."</td>"."<td class=\"text-center\">".$video['type']."</td>";
 		echo "</tr>";
 	}
 
@@ -172,8 +172,8 @@ function inboxFilesOptions(){
 
 	for ($i=0; $i < sizeof($files); $i++) {
 
-		if($files[$i] != "." && $files[$i] != ".." && $files[$i] != "@eaDir"){
-		echo "<option value=\"".$i."\">";
+		if($files[$i] != "." && $files[$i] != ".." && $files[$i] != "@eaDir" && $files[$i] != ".gitignore"){
+		echo "<option value=\"".$files[$i]."\">";
 		echo $files[$i];
 		echo "</option>\n";
 	}
@@ -181,7 +181,20 @@ function inboxFilesOptions(){
 
 }
 
+function videosInInbox(){
 
+	$files = scandir("inbox");
+	$count = 0;
+	for ($i=0; $i < sizeof($files); $i++) {
+
+		if($files[$i] != "." && $files[$i] != ".." && $files[$i] != "@eaDir" && $files[$i] != ".gitignore"){
+			$count++;
+		}
+	}	
+
+	return $count;
+
+}
 
 
 ?>

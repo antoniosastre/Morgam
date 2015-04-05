@@ -68,12 +68,12 @@ if(!isValidCookie("morgam")){
 <br><br>
 <div class="row">
 
-	<div class="col-md-3" style="position: relative; bottom: -50px;">
+	<div class="col-md-3">
 
 <form action="user.php" method="GET" class="form-horizontal">
 	<div class="form-group">
-		<label for="yearSelector" class="col-sm-2 control-label">Año</label>
-		<div class="col-sm-10">
+		<label for="yearSelector" class="col-sm-3 control-label">Año</label>
+		<div class="col-sm-9">
 		<select name="y" id="yearSelector" class="form-control">
   			<?php
   				foreach (videoYears() as $year) {
@@ -91,7 +91,7 @@ if(!isset($_GET['u'])){
 	}
 ?>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
 </div>
 </div>
@@ -99,12 +99,12 @@ if(!isset($_GET['u'])){
 
 	</div>
 	<div class="col-md-1"></div>
-	<div class="col-md-4"  style="position: relative; bottom: -50px;">
+	<div class="col-md-3">
 
 <form action="user.php" method="GET" class="form-horizontal">
 	<div class="form-group">
-		<label for="daysSelector" class="col-sm-2 control-label">Últimos</label>
-	 <div class="col-sm-10">
+		<label for="daysSelector" class="col-sm-3 control-label">Últimos</label>
+	 <div class="col-sm-9">
 	 <select name="d" id="daysSelector" class="form-control">
   <option value="1">Hoy</option>
   <option value="2">2 Días</option>
@@ -123,25 +123,25 @@ if(!isset($_GET['u'])){
 	}
 ?>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
 </div>
 </div>
 </form>
 	</div>
 	<div class="col-md-1"></div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 
 <form action="user.php" method="GET" class="form-horizontal">
 	<div class="form-group">
-		<label for="fromSelector" class="col-sm-2 control-label">Desde</label>
-		<div class="col-sm-10">
+		<label for="fromSelector" class="col-sm-3 control-label">Desde</label>
+		<div class="col-sm-9">
 		<input type="month" name="f" id="fromSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="toSelector" class="col-sm-2 control-label">Hasta</label>
-		<div class="col-sm-10">
+		<label for="toSelector" class="col-sm-3 control-label">Hasta</label>
+		<div class="col-sm-9">
 		<input type="month" name="t" id="toSelector" class="form-control" value="<?php echo date('Y-m'); ?>">
 		</div>
 	</div>
@@ -153,7 +153,7 @@ if(!isset($_GET['u'])){
 	}
 ?>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-3 col-sm-9">
 <button type="submit" class="btn btn-default">Listar</button>
 </div>
 </div>

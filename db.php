@@ -315,16 +315,29 @@ function videoYears(){
 
 }
 
-function tableOfYear($year, $user = 0){
+function tableOfYear($year, $user = 0, $person = 0, $place = 0, $tag = 0){
 
 	require_once 'functions.php';
 
 	global $conexion;
-	if(empty($user)){
-		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" ORDER BY recorded_when DESC, id DESC";
-	}else{
+
+	if(!empty($user)){
 		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" AND recorded_who=\"".userIdByUser($user)."\" ORDER BY recorded_when DESC, id DESC";
 	}
+
+	if(!empty($person)){
+		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" AND recorded_who=\"".userIdByUser($user)."\" ORDER BY recorded_when DESC, id DESC";
+	}
+
+	if(!empty($place)){
+		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" AND recorded_who=\"".userIdByUser($user)."\" ORDER BY recorded_when DESC, id DESC";
+	}
+
+	if(!empty($tag)){
+		$que = "SELECT * FROM video WHERE YEAR(recorded_when)=\"".$year."\" AND recorded_who=\"".userIdByUser($user)."\" ORDER BY recorded_when DESC, id DESC";
+	}
+
+
 	$res = mysqli_query($conexion,$que);
 
 	printVideoRows($res);
@@ -332,7 +345,7 @@ function tableOfYear($year, $user = 0){
 }
 
 
-function tableOfInterval($from, $to, $user = 0){
+function tableOfInterval($from, $to, $user = 0, $people = 0, $place = 0, $tag = 0){
 
 	require_once 'functions.php';
 
@@ -348,7 +361,7 @@ function tableOfInterval($from, $to, $user = 0){
 }
 
 
-function tableOfLast($days, $user = 0){
+function tableOfLast($days, $user = 0, $people = 0, $place = 0, $tag = 0){
 
 	require_once 'functions.php';
 

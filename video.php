@@ -58,20 +58,18 @@ echo "</table>";
 
 echo "<br><br>";
 
-
-echo "<video id=\"video-".$video['id']."\" class=\"video-js vjs-default-skin vjs-big-play-centered\"
-  controls preload=\"auto\" width=\"640\" height=\"360\"";
+echo "<div class=\"embed-responsive embed-responsive-16by9\">";
+// class=\"video-js vjs-default-skin vjs-big-play-centered\"
+echo "<video id=\"video-".$video['id']."\" width=\"640\" height=\"360\" controls>";
 
   //echo "poster=\"http://video-js.zencoder.com/oceans-clip.png\"";
 
-echo  " data-setup='{\"example_option\":true}'>
- <source src=\"".$video['pathtofile']."\" type='".$video['type']."' />
- <p class=\"vjs-no-js\">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href=\"http://videojs.com/html5-video-support/\" target=\"_blank\">supports HTML5 video</a></p>
-</video>";
-
+echo "<source src=\"".$video['pathtofile']."\" />";
+echo "</video></div>";
 
 ?>
 
+<br><br><br>
 </div>
 		
 	</body>

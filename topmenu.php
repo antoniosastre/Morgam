@@ -16,36 +16,65 @@
       <ul class="nav navbar-nav">
         <li <?php if (strpos($_SERVER['SCRIPT_NAME'], "index.php")) echo "class=\"active\""; ?>><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a></li>
         <li <?php if (strpos($_SERVER['SCRIPT_NAME'], "list.php")) echo "class=\"active\""; ?>><a href="list.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista</a></li>
+        
         <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Ir a...<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Ir a...<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><form action="video.php" method="GET" class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" name="id" placeholder="Video ID">
-        </div>
-    
-      </form></li>
-     
-            <li class="divider"></li>
+            <li>
+                <form action="video.php" method="GET" class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="id" placeholder="Video ID">
+                  </div>
+                </form>
+            </li>
+            <li>
+                <form action="user.php" method="GET" class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="u" placeholder="Usuario">
+                  </div>
+                </form>
+            </li>
+            
+            <li><form action="people.php" method="GET" class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="q" placeholder="Persona">
+                  </div>
+                </form>
+            </li>
 
-<li><form action="user.php" method="GET" class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" name="u" placeholder="Usuario">
-        </div>
-    
-      </form></li>
+            <li><form action="place.php" method="GET" class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="q" placeholder="Lugar">
+                  </div>
+                </form>
+            </li>
 
-  
-            <li class="divider"></li>
+            <li><form action="tag.php" method="GET" class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="q" placeholder="Etiqueta">
+                  </div>
+                </form>
+            </li>
+
           </ul>
         </li>
 
-        <li <?php if (strpos($_SERVER['SCRIPT_NAME'], "upload-video.php")) echo "class=\"active\""; ?>><a href="upload-video.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subir vídeo</a></li>
+        <li <?php if (strpos($_SERVER['SCRIPT_NAME'], "upload-video.php")) echo "class=\"active\""; ?>><a href="upload-video.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subir vídeo 
+        <?php 
+
+        require_once 'functions.php'; 
+
+        if(videosInInbox()>0){
+          echo "<span class=\"badge\">".videosInInbox()."</span>";
+        }
+        ?>
+
+        </a></li>
 
       </ul>
       <form action="search.php" method="GET" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" name="q" placeholder="Buscar vídeo">
+          <input type="text" name="q" placeholder="Buscar vídeo" class="form-control">
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
