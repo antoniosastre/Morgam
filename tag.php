@@ -62,7 +62,7 @@ if(!isValidCookie("morgam")){
 
 	<div class="col-md-3">
 
-<form action="people.php" method="GET" class="form-horizontal">
+<form action="tag.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="yearSelector" class="col-sm-3 control-label">Año</label>
 		<div class="col-sm-9">
@@ -89,7 +89,7 @@ if(!isValidCookie("morgam")){
 	<div class="col-md-1"></div>
 	<div class="col-md-3">
 
-<form action="people.php" method="GET" class="form-horizontal">
+<form action="tag.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="daysSelector" class="col-sm-3 control-label">Últimos</label>
 	 <div class="col-sm-9">
@@ -116,7 +116,7 @@ if(!isValidCookie("morgam")){
 	<div class="col-md-1"></div>
 	<div class="col-md-4">
 
-<form action="people.php" method="GET" class="form-horizontal">
+<form action="tag.php" method="GET" class="form-horizontal">
 	<div class="form-group">
 		<label for="fromSelector" class="col-sm-3 control-label">Desde</label>
 		<div class="col-sm-9">
@@ -145,22 +145,20 @@ if(!isValidCookie("morgam")){
 
 <?php
 
-if(!empty($_GET['y'])){
-	echo "Se muestran todos los vídeos de ".$_GET['y']." de ".$_GET['q'].":";
-	echo "<hr>";
-	echo tableOfYear($_GET['y'], 0,$_GET['q']);
-}
-
 if(!empty($_GET['f']) && !empty($_GET['t'])){
 	echo "Se muestra desde el ".explode('-', $_GET['f'])[1]."/".explode('-', $_GET['f'])[0]." hasta el ".explode('-', $_GET['t'])[1]."/".explode('-', $_GET['t'])[0]." de ".$_GET['q'].":";
 	echo "<hr>";
-	echo tableOfInterval($_GET['f'], $_GET['t'], 0, $_GET['q']);
-}
+	echo tableOfInterval($_GET['f'], $_GET['t'], 0, 0, 0, $_GET['q']);
+}else
 
 if(!empty($_GET['d'])){
 	echo "Se muestran los últimos ".$_GET['d']." días de ".$_GET['q'].":";;
 	echo "<hr>";
-	echo tableOfLast($_GET['d'], 0, $_GET['q']);
+	echo tableOfLast($_GET['d'], 0, 0, 0, $_GET['q']);
+}else{
+	echo "Se muestran todos los vídeos de ".$_GET['y']." de ".$_GET['q'].":";
+	echo "<hr>";
+	echo tableOfYear($_GET['y'], 0, 0, 0, $_GET['q']);
 }
 
 ?>

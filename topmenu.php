@@ -35,7 +35,7 @@
                 </form>
             </li>
             
-            <li><form action="people.php" method="GET" class="navbar-form navbar-left">
+            <li><form action="person.php" method="GET" class="navbar-form navbar-left">
                   <div class="form-group">
                     <input type="text" class="form-control" name="q" placeholder="Persona">
                   </div>
