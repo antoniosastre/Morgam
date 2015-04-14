@@ -387,8 +387,6 @@ function tableOfYear($year, $user = 0, $person = 0, $place = 0, $tag = 0, $title
 	
 	}
 
-	echo $que;
-
 	$res = mysqli_query($conexion,$que);
 
 	printVideoRows($res);
